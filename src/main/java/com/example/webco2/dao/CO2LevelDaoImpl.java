@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Date;
 
 @Repository
@@ -47,5 +48,11 @@ public class CO2LevelDaoImpl implements CO2LevelDao {
         CO2Level co2Level = new CO2Level(level);
         co2Level.setLevel(level);
         return co2Level;
+    }
+
+    @Override
+    public Collection<CO2Level> getAll() {
+        String sql = "select * from "+ so2Table;
+        return null;
     }
 }

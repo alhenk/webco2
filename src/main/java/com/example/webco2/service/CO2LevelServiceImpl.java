@@ -17,8 +17,9 @@ public class CO2LevelServiceImpl implements CO2LevelService {
     }
 
     @Override
-    public void save(CO2Level level) {
+    public int save(CO2Level level) {
         co2LevelDao.save(level);
+        return 0;
     }
 
     @Override
