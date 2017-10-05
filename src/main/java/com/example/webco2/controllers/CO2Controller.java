@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,8 +41,28 @@ public class CO2Controller {
         return "welcome";
     }
 
+    @RequestMapping("/chart2")
+    public String monitor2() {
+        return "chart2";
+    }
+
     @RequestMapping("/chart")
-    public String welcome() {
+    public String monitor(Map<String, Object> model) {
+        Collection<CO2Level> levels = co2LevelService.findCurrent();
+        List<String> levelRow = new ArrayList<String>();
+        List<String> dateRow = new ArrayList<String>();
+
+        for (CO2Level level: levels ) {
+            String[] record = {level.getDatetime().toString(), level.getLevel().toString()};
+            dateRow.add(level.getDatetime().toString());
+            levelRow.add(level.getLevel().toString());
+        }
+
+        String[] dates = {"2014","2015","2016"};
+        long[] co2 ={10,20,30};
+
+        model.put("dates", dates);
+        model.put("co2", co2);
         return "chart";
     }
 

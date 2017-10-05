@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class CO2Level {
     private Long level;
-    private Date date;
+    private Date datetime;
 
     public CO2Level(){
     }
@@ -14,9 +14,9 @@ public class CO2Level {
       this.setLevel(level);
     }
 
-    public CO2Level(Long level, Date date){
+    public CO2Level(Long level, Date datetime){
         this.setLevel(level);
-        this.setDate(date);
+        this.setDatetime(datetime);
     }
     public Long getLevel() {
         return level;
@@ -26,11 +26,11 @@ public class CO2Level {
         this.level = level;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 }

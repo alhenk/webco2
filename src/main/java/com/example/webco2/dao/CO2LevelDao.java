@@ -14,4 +14,6 @@ public interface CO2LevelDao {
     CO2Level find(long id);
 
     Collection<CO2Level> getAll();
+
+    Collection<CO2Level> getAllCurrent();
 }

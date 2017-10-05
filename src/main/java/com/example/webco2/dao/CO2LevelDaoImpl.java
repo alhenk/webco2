@@ -3,12 +3,12 @@ package com.example.webco2.dao;
 import com.example.webco2.model.CO2Level;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 @Repository
 public class CO2LevelDaoImpl implements CO2LevelDao {
@@ -53,6 +53,13 @@ public class CO2LevelDaoImpl implements CO2LevelDao {
     @Override
     public Collection<CO2Level> getAll() {
         String sql = "select * from "+ so2Table;
-        return null;
+        return getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(CO2Level.class));
     }
+
+    @Override
+    public Collection<CO2Level> getAllCurrent() {
+        String sql = "select * from "+ so2Table + " where datetime > current_date();";
+        return getJdbcTemplate().query(sql, new BeanPropertyRowMapper<>(CO2Level.class));
+    }
+
 }
