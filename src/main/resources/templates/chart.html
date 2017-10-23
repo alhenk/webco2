@@ -1,78 +1,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Simple Chart example</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="/css/userCSS.css"></link>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+window.onload = function () {
+	var dataPoints = [{y : 10}, {y : 13}, {y : 18}, {y : 20}, {y : 17}];
+
+    for(var i = 0; i < 3; i++){
+          // ... do something
+	     };
+
+	var chart = new CanvasJS.Chart("chartContainer", {
+			title : {
+				text : "Dynamic Data"
+			},
+			data : [{
+					type : "spline",
+					dataPoints : dataPoints
+				}
+			]
+		});
+
+	chart.render();
+
+	var yVal = 15, updateCount = 0;
+	var updateChart = function () {
+
+		yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
+      	updateCount++;
+
+		dataPoints.push({
+			y : yVal
+		});
+
+        chart.options.title.text = "Update " + updateCount;
+		chart.render();
+
+	};
+
+	// update chart every second
+	setInterval(function(){updateChart()}, 1000);
+}
+
+</script>
+    <script type = "text/javascript" src = "/assets/script/canvasjs.min.js" >  </script>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Charts Demo</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#" id="line">Line Chart</a></li>
-                <li><a href="#" id="bar">Bar Chart</a></li>
-                <li><a href="#" id="refreshCharts">Refresh</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-
-<div class="jumbotron">
-    <div class="container">
-        <!-- Added to prevent navbar from overlapping the charts -->
-    </div>
-</div>
-
-<div id="parentDiv">
-</div>
-
-<script type="text/javascript" src="/js/Chart.min.js"></script>
-<script type="text/javascript" src="/js/jquery-1.12.0.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/Chart.min.js"></script>
-<script type="text/javascript" src="/js/getChartData.js"></script>
-<script type="text/javascript">userScript.getChartData();</script>
-<canvas id="myChart" width="400" height="250"></canvas>
-<input type="button" value="Add data" onclick="addData()"/>
-
-<script>
-var ctx = document.getElementById("myChart");
-var data = {
-    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-    datasets: [{
-        data: [86,114,106,106,107,111,133,221,783,2478],
-        label: "Africa",
-        borderColor: "#3e95cd",
-        fill: false
-    }]
-  };
-function addData(){
-  myChart.data.datasets[0].data[0]= 500;
-  myChart.labels[10]="new one";
-};
-var options = {
-    title: {
-      display: true,
-      text: 'World population per region (in millions)'
-    }
-  };
-
-var myChart = new Chart(ctx,{
-  type: 'line',
-  data,
-  options});
-</script>
-
+<div id = "chartContainer" style = "height: 300px; width: 100%;" />
 </body>
 </html>

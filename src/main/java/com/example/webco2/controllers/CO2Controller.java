@@ -56,14 +56,23 @@ public class CO2Controller {
             String[] record = {level.getDatetime().toString(), level.getLevel().toString()};
             dateRow.add(level.getDatetime().toString());
             levelRow.add(level.getLevel().toString());
+            System.out.println(levelRow);
         }
 
         String[] dates = {"2014","2015","2016"};
-        long[] co2 ={10,20,30};
+        //long[] co2 ={10,20,30};
+        int co2=1000;
+        long[] readings = {600, 680, 823, 900};
 
         model.put("dates", dates);
         model.put("co2", co2);
+        model.put("readings", readings);
         return "chart";
+    }
+
+    @RequestMapping("/chart3")
+    public String monitor3(Map<String, Object> model) {
+       return "chart3";
     }
 
     @RequestMapping("/greeting")
