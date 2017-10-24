@@ -1,14 +1,8 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-    window.onload = function () {
+window.onload = function () {
     var dataPoints = [{y : 0}, {y : 0}];
 
-    //var levels = [600, 680, 823, 900];
-    var levels = [[${readings}]];
+    var levels = [600, 680, 823, 900];
+    //var levels = [[${readings}]];
     for(var i = 0; i < levels.length; i++){
         dataPoints.push({
             y : levels[i]
@@ -31,7 +25,7 @@
     var yVal = 15, updateCount = 0;
     var updateChart = function () {
 
-        yVal = yVal + 1;//Math.round(5 + Math.random() * (-5 - 5));
+        yVal = yVal + 500;//Math.round(5 + Math.random() * (-5 - 5));
           updateCount++;
 
         dataPoints.push({
@@ -47,11 +41,4 @@
     setInterval(function(){updateChart()}, 1000);
 
 
-}/*]]>*/
-    </script>
-    <script type = "text/javascript" src = "/assets/script/canvasjs.min.js"></script>
-</head>
-<body>
-<div id = "chartContainer" style = "height: 300px; width: 100%;" />
-</body>
-</html>
+}
